@@ -1,86 +1,51 @@
-#include <unordered_map>
+#include <vector>
 #include <string>
 #include <algorithm>
 
 #include "../utility.h"
 
+constexpr char OPEN_SQUARE{ '.' };
+constexpr char TREE{ '#' };
 
-struct PasswordPolicy
+
+int count_tree_hits(const std::vector<std::vector<char>> &map, int step_size_right=3, int step_size_down=1);
+
+int sol_3_1(const std::string &file_path)
 {
-    int minNumOcc{ 0 };
-    int maxNumOcc{ 0 };
-    char letter{ 'a' };
-};
-struct PasswordAndPolicy
+    std::vector<std::vector<char>> map = read_2d_vec_from_file<char>(file_path);
+
+    return count_tree_hits(map);
+}
+
+
+int64_t sol_3_2(const std::string &file_path)
 {
-    PasswordPolicy policy{ };
-    std::string password{ };
-    static bool is_password_valid_1(const PasswordAndPolicy &pAndp);
-    static bool is_password_valid_2(const PasswordAndPolicy &pAndp);
-};
+    std::vector<std::vector<char>> map = read_2d_vec_from_file<char>(file_path);
+    int64_t result{ 1 };
+    using Slope = Point<int>;
+    std::vector<Slope> slope_vec = { {1,1}, {3,1}, {5,1}, {7,1}, {1,2} };
 
-std::vector<PasswordAndPolicy> read_data_from_file(const std::string& file_path);
-
-int sol_2_1(const std::string &file_path)
-{
-    std::vector<PasswordAndPolicy> passwordsAndPolicies = read_data_from_file(file_path);
-    int num_valid_passwords{ 0 };
-
-    for (const auto & pp : passwordsAndPolicies)
+    for (auto &slope : slope_vec)
     {
-        if (PasswordAndPolicy::is_password_valid_1(pp)) ++num_valid_passwords; 
+        result *= count_tree_hits(map, slope.x, slope.y);
     }
 
-    return num_valid_passwords;
+    return result;
 }
 
-
-int sol_2_2(const std::string &file_path)
+int count_tree_hits(const std::vector<std::vector<char>> &map, int step_size_right, int step_size_down)
 {
-    std::vector<PasswordAndPolicy> passwordsAndPolicies = read_data_from_file(file_path);
-    int num_valid_passwords{ 0 };
+    int num_tree_hits{ 0 };
+    int dim_y{ map.size() };
+    int dim_x{ map[0].size() };
+    Point<int> pos{0,0};
 
-    for (const auto & pp : passwordsAndPolicies)
+    while (pos.y < dim_y)
     {
-        if (PasswordAndPolicy::is_password_valid_2(pp)) ++num_valid_passwords; 
+        if (TREE == map.at(pos.y).at(pos.x)) ++num_tree_hits;
+        pos.x = (pos.x+step_size_right) % dim_x;
+        pos.y += step_size_down;
     }
 
-    return num_valid_passwords;
+    return num_tree_hits;
 }
-
-bool PasswordAndPolicy::is_password_valid_2(const PasswordAndPolicy &pAndp)
-{
-    const auto & passw{ pAndp.password };
-    bool first = pAndp.policy.letter == passw[pAndp.policy.minNumOcc-1];
-    bool second = pAndp.policy.letter == passw[pAndp.policy.maxNumOcc-1];
-    return first != second;
-}
-bool PasswordAndPolicy::is_password_valid_1(const PasswordAndPolicy &pAndp)
-{
-    auto n = std::count(pAndp.password.begin(), pAndp.password.end(), pAndp.policy.letter);
-
-    return n >= pAndp.policy.minNumOcc && n <= pAndp.policy.maxNumOcc;
-}
-
-std::vector<PasswordAndPolicy> read_data_from_file(const std::string& file_path)
-{
-    std::vector<PasswordAndPolicy> p_p_vec{};
-    std::fstream input_file;
-    input_file.open(file_path,std::ios::in);
-    if (input_file.is_open()){
-        std::string input_line;
-        while(getline(input_file, input_line))
-        {  
-            std::vector<std::string> line_split = split_string(input_line, ":");
-            std::vector<int> nums = parse_string_to_number_vec<int>(line_split[0]);
-            PasswordPolicy policy{ nums[0], nums[1], line_split[0].back() };
-            std::string pass{ line_split[1].substr(1) };
-            PasswordAndPolicy new_p_p{ policy, pass };
-
-            p_p_vec.push_back(new_p_p);
-        }
-        input_file.close();   
-    }
-    return p_p_vec;
-}
-
