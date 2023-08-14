@@ -8,6 +8,7 @@
 #include "7/sol_7.cpp"
 #include "8/sol_8.cpp"
 #include "9/sol_9.cpp"
+#include "10/sol_10.cpp"
 #include <filesystem>
 
 std::string get_input_file_name(int day)
@@ -36,6 +37,8 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << sol_8_2(get_input_file_name(8)) << std::endl;
     std::cout << sol_9_1(get_input_file_name(9)) << std::endl;
     std::cout << sol_9_2(get_input_file_name(9)) << std::endl;
+    std::cout << sol_10_1(get_input_file_name(10)) << std::endl;
+    std::cout << sol_10_2(get_input_file_name(10)) << std::endl;
 
     return 0;
 }
