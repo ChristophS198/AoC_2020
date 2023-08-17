@@ -100,4 +100,6 @@ The entire 36-bit address space still begins initialized to the value 0 at every
 
 Execute the initialization program using an emulator for a version 2 decoder chip. What is the sum of all values left in memory after it completes?
 
-Answer: 
+Your puzzle answer was **4173715962894**
+
+Both parts of this puzzle are complete! They provide two gold stars: **

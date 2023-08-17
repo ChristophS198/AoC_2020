@@ -43,3 +43,5 @@ Given the same example list from above:
 How many passwords are valid according to the new interpretation of the policies?
 
 Answer: **388**
+
+Both parts of this puzzle are complete! They provide two gold stars: **

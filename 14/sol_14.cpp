@@ -50,7 +50,6 @@ t36UInt sol_14_2(const std::string &file_path)
     std::vector<ProgramInstruction> program_ins = read_program_ins_from_file(file_path);
     tMemory mem;
 
-    // too low: 3654995300986
     return init_program_v2(program_ins, mem);
 }
 
