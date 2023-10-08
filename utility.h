@@ -16,7 +16,19 @@ struct Point3D
     bool operator<(const Point3D& other) const;
     bool operator==(const Point3D& other) const;
     T dist_squ() const;
+    struct HashFunction 
+    {
+        size_t operator()(const Point3D &p) const;
+    };
 };
+template<typename T>
+size_t  Point3D<T>::HashFunction::operator()(const Point3D& pos) const
+{
+    size_t xHash = std::hash<int>()(pos.x);
+    size_t yHash = std::hash<int>()(pos.y) << 1;
+    size_t zHash = std::hash<int>()(pos.z) << 2;
+    return xHash ^ yHash ^ zHash;
+}
 
 template<typename T>
 T Point3D<T>::dist_squ() const
