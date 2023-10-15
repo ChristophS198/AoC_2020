@@ -11,11 +11,10 @@ using TMath = int64_t;
 std::pair<TMath,size_t> convert_to_num(const std::string c_vec, size_t pos);
 size_t skip_space(const std::string &expr, size_t pos);
 TMath eval_operator(char op, TMath op1, TMath op2);
-std::pair<TMath,size_t> eval_expr(const std::string &expr, size_t pos, TMath intermediate_sum);
-std::pair<TMath,size_t> eval_expr_2(const std::string &expr, size_t pos, TMath intermediate_sum, bool invert_op_precedence=false);
+std::pair<TMath,size_t> eval_expr(const std::string &expr, size_t pos, TMath intermediate_sum, bool invert_op_precedence=false);
 
 
-TMath sol_18_1(const std::string &file_path)
+TMath sol_19_1(const std::string &file_path)
 {
     std::vector<std::string> math_expressions = read_string_vec_from_file(file_path);
     TMath sum{ 0 };
@@ -30,21 +29,21 @@ TMath sol_18_1(const std::string &file_path)
 }
 
 
-TMath sol_18_2(const std::string &file_path)
+TMath sol_19_2(const std::string &file_path)
 {
     std::vector<std::string> math_expressions = read_string_vec_from_file(file_path);
     TMath sum{ 0 };
 
     for (auto &expr : math_expressions)
     {
-        std::pair<TMath,size_t> res = eval_expr_2(expr, 0,0, true);
+        std::pair<TMath,size_t> res = eval_expr(expr, 0,0, true);
         sum += res.first;
     }
 
     return sum;
 }
 
-std::pair<TMath,size_t> eval_expr_2(const std::string &expr, size_t pos, TMath intermediate_sum, bool invert_op_precedence)
+std::pair<TMath,size_t> eval_expr(const std::string &expr, size_t pos, TMath intermediate_sum, bool invert_op_precedence)
 {
     char op{ '+' };
 
@@ -76,7 +75,7 @@ std::pair<TMath,size_t> eval_expr_2(const std::string &expr, size_t pos, TMath i
                 ++pos;
                 if (invert_op_precedence)
                 {
-                    tmp_dig = eval_expr_2(expr,pos,0, invert_op_precedence);
+                    tmp_dig = eval_expr(expr,pos,0, invert_op_precedence);
                     pos = tmp_dig.second;
                     intermediate_sum = eval_operator(op, intermediate_sum, tmp_dig.first);
                     return { intermediate_sum, pos };
@@ -84,62 +83,7 @@ std::pair<TMath,size_t> eval_expr_2(const std::string &expr, size_t pos, TMath i
                 break;
             case '(':
                 ++pos;
-                tmp_dig = eval_expr_2(expr,pos,0, invert_op_precedence);
-                pos = tmp_dig.second;
-                intermediate_sum = eval_operator(op, intermediate_sum, tmp_dig.first);
-                break;
-            case ')':
-                ++pos;
-                return { intermediate_sum,pos };
-                break;
-            default:
-                std::ostringstream err_msg; 
-                err_msg << "eval_expr found an invalid character " << c_1 << " at pos" << pos << "!";
-                throw std::invalid_argument(err_msg.str());
-                break;
-            }
-
-        }
-        pos = skip_space(expr,pos); // move pos to next char != space 
-    }
-    
-    return { intermediate_sum,pos };
-}
-
-std::pair<TMath,size_t> eval_expr(const std::string &expr, size_t pos, TMath intermediate_sum)
-{
-    char op{ '+' };
-
-    pos = skip_space(expr,pos); // move pos to next char != space 
-    std::pair<TMath,size_t> tmp_dig{0,0};
-
-    while (pos < expr.length())
-    {
-        char c_1{ expr.at(pos) };
-
-        if (std::isdigit(static_cast<unsigned char>(c_1)))
-        {
-            tmp_dig = convert_to_num(expr,pos);
-            pos = tmp_dig.second;
-            intermediate_sum = eval_operator(op, intermediate_sum, tmp_dig.first);
-        }
-        else
-        {
-            switch (c_1)
-            {
-            case '+':
-                // update operator 
-                op = expr.at(pos);
-                ++pos;
-                break;
-            case '*':
-                // update operator 
-                op = expr.at(pos);
-                ++pos;
-                break;
-            case '(':
-                ++pos;
-                tmp_dig = eval_expr(expr,pos,0);
+                tmp_dig = eval_expr(expr,pos,0, invert_op_precedence);
                 pos = tmp_dig.second;
                 intermediate_sum = eval_operator(op, intermediate_sum, tmp_dig.first);
                 break;

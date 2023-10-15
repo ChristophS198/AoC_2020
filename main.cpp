@@ -21,6 +21,14 @@
 
 std::string get_input_file_name(int day)
 {
+    #ifdef DIR_PATH
+        // #define STR(DIR_PATH) #DIR_PATH
+        // #define STRING(DIR_PATH) STR(DIR_PATH)
+        std::string path = DIR_PATH;
+        path += "/";
+        return path + std::to_string(day) + "/data.txt";
+    #endif
+
     return "../" + std::to_string(day) + "/data.txt";
 }
 

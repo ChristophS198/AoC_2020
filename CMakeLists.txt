@@ -7,6 +7,9 @@ enable_testing()
 
 add_executable(${EXECUTABLE_NAME} main.cpp)
 
+target_compile_definitions(${EXECUTABLE_NAME} PRIVATE DIR_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+
+
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
 set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
 include(CPack)
