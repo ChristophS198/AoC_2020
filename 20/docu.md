@@ -270,4 +270,6 @@ Determine how rough the waters are in the sea monsters' habitat by counting the 
 
 How many # are not part of a sea monster?
 
-Answer: 
+Your puzzle answer was **1705**
+
+Both parts of this puzzle are complete! They provide two gold stars: **

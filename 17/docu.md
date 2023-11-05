@@ -402,4 +402,6 @@ After the full six-cycle boot process completes, 848 cubes are left in the activ
 
 Starting with your given initial configuration, simulate six cycles in a 4-dimensional space. How many cubes are left in the active state after the sixth cycle?
 
-Answer: 
+Your puzzle answer was **1380**
+
+Both parts of this puzzle are complete! They provide two gold stars: **
