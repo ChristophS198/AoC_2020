@@ -130,7 +130,28 @@ bool Point<T>::operator==(const Point& other) const
  * @return T number contained in char vector
  */
 template<typename T>
-T convert_to_num(const std::vector<char> c_vec)
+T convert_to_num(const std::vector<char> &c_vec)
+{
+    T num{};
+    for (const auto& c : c_vec)
+    {
+        if (!std::isdigit(static_cast<unsigned char>(c)))
+        {
+            throw std::invalid_argument("Trying to convert non-digit char to digit!");
+        }
+        num = num*10 + c - '0';
+    }
+    return num;
+}
+
+/**
+ * @brief converts a vector of chars to a number
+ * 
+ * @param c_vec vector of chars
+ * @return T number contained in char vector
+ */
+template<typename T>
+T convert_to_num(const std::string &c_vec)
 {
     T num{};
     for (const auto& c : c_vec)

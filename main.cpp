@@ -20,6 +20,7 @@
 #include "19/sol_19.cpp"
 #include "20/sol_20.cpp"
 #include "21/sol_21.cpp"
+#include "22/sol_22.cpp"
 #include <filesystem>
 
 std::string get_input_file_name(int day)
@@ -78,9 +79,11 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << sol_19_2(get_input_file_name(19)) << std::endl;
     std::cout << sol_20_1(get_input_file_name(20)) << std::endl;
     std::cout << sol_20_2(get_input_file_name(20)) << std::endl;
-*/
     std::cout << sol_21_1(get_input_file_name(21)) << std::endl;
     std::cout << sol_21_2(get_input_file_name(21)) << std::endl;
+*/
+    std::cout << sol_22_1(get_input_file_name(22)) << std::endl;
+    std::cout << sol_22_2(get_input_file_name(22)) << std::endl;
 
     return 0;
 }
