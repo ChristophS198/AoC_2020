@@ -381,4 +381,6 @@ After the game, the winning player's score is calculated from the cards they hav
 
 Defend your honor as Raft Captain by playing the small crab in a game of Recursive Combat using the same two decks as before. What is the winning player's score?
 
-Answer: 
+Your puzzle answer was **36515**
+
+Both parts of this puzzle are complete! They provide two gold stars: **
