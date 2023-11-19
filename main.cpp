@@ -82,9 +82,9 @@ int main(int /*argc*/, char** /*argv*/)
     std::cout << sol_20_2(get_input_file_name(20)) << std::endl;
     std::cout << sol_21_1(get_input_file_name(21)) << std::endl;
     std::cout << sol_21_2(get_input_file_name(21)) << std::endl;
-*/
     std::cout << sol_22_1(get_input_file_name(22)) << std::endl;
     std::cout << sol_22_2(get_input_file_name(22)) << std::endl;
+*/
     std::cout << sol_23_1(get_input_file_name(23)) << std::endl;
     std::cout << sol_23_2(get_input_file_name(23)) << std::endl;
 
