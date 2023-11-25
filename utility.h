@@ -122,6 +122,11 @@ bool Point<T>::operator==(const Point& other) const
     return this->x == other.x && this->y == other.y;
 }
 
+template<typename T>
+Point<T> operator+(const Point<T> &p1, const Point<T> &p2)
+{
+    return Point<T>{p1.x+p2.x, p1.y+p2.y};
+}
 
 /**
  * @brief converts a vector of chars to a number
