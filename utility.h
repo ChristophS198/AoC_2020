@@ -171,7 +171,9 @@ T convert_to_num(const std::string &c_vec)
 }
 
 /**
- * @brief Converts a string containig multiple numbers to a vector of numbers (currently only positive numbers)
+ * @brief Converts a string containig multiple numbers to a vector of numbers
+ * each number consists of an optional leading sign + consecutive digits, 
+ * whenever a non-digit is hit, the current number ends and is appended to the result vector 
  * 
  * @param in_str string containing multiple numbers
  * @return std::vector<unsigned int> vector where all numbers contained in in_str are inserted
